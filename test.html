@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Cat Extension Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #444;
+      padding-bottom: 10px;
+    }
+    p {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .instructions {
+      background: #e7f3fe;
+      border-left: 4px solid #2196F3;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .features {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cursor Cat Extension Test Page</h1>
+
+  <div class="instructions">
+    <h2>How to Test</h2>
+    <ol>
+      <li>Load the extension in Chrome (chrome://extensions, enable Developer Mode, Load Unpacked)</li>
+      <li>Click the extension icon and enable the cat</li>
+      <li>Move your cursor around this page to see the cat follow it</li>
+      <li>Try hovering over the cat for 3+ seconds to see special animations</li>
+      <li>Click on the cat to hear it meow and see a reaction animation</li>
+    </ol>
+  </div>
+
+  <div class="features">
+    <h2>Expected Features</h2>
+    <ul>
+      <li><strong>Cursor Following:</strong> Cat should follow your cursor position smoothly</li>
+      <li><strong>Walking Animation:</strong> Cat uses walking animation when moving at normal speed</li>
+      <li><strong>Running Animation:</strong> Cat runs faster when cursor moves quickly or is far away</li>
+      <li><strong>Idle on Hover:</strong> Cat plays idle animation when cursor is on it</li>
+      <li><strong>Special Animations:</strong> After 3 seconds of hovering, cat sleeps or waves paw</li>
+      <li><strong>Click Reaction:</strong> Clicking the cat triggers meow sound + meow/scratch animation</li>
+      <li><strong>Bowl Collection:</strong> Cat collects food bowls scattered on the page</li>
+      <li><strong>Text Hole:</strong> Text parts around the cat creating a "hole" effect</li>
+    </ul>
+  </div>
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  </p>
+
+  <p>
+    The quick brown fox jumps over the lazy dog. This sentence contains every letter of the alphabet and is often used for testing fonts and displays. Now let's add some more text to make this paragraph longer and more suitable for testing the cat extension's text hole feature.
+  </p>
+
+  <p>
+    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
+  </p>
+
+  <p>
+    In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication.
+  </p>
+
+  <p>
+    The cat extension creates an interactive experience on any webpage. As you move your cursor around, you'll notice the adorable pixel cat following closely behind. The cat is smart enough to run when you move quickly, making the interaction feel more alive and responsive. Try different movements to see how the cat reacts!
+  </p>
+
+  <p>
+    Cursor-following mechanics in games and interactive applications create a sense of connection between the user and the digital elements on screen. By implementing velocity detection, we can make the cat appear more intelligent - it knows when to walk leisurely and when to sprint to catch up with your fast-moving cursor.
+  </p>
+
+  <p>
+    The text rendering system in this extension uses a simplified approach to create holes around the cat character. As the cat moves through paragraphs, the text appears to part around it, creating a unique visual effect that makes it seem like the cat is truly inhabiting the webpage rather than just being overlaid on top of it.
+  </p>
+
+  <p>
+    Food bowls are scattered across paragraphs on the page, giving the cat a purpose beyond just following your cursor. As the cat collects these bowls, your score increases, adding a gamification element to the experience. Bowls respawn after being collected, ensuring the fun never stops!
+  </p>
+
+  <p>
+    Interactive animations add personality to the cat character. When you hover over the cat, it knows you're there and responds with idle animations. Leave your cursor on the cat for several seconds, and you might see it get sleepy or start waving its paw at you - a playful acknowledgment of your attention.
+  </p>
+
+  <p>
+    The click interaction is one of the most delightful features. When you click on the cat, it responds with a meow sound and either a meowing or scratching animation. This immediate feedback creates a tangible sense of interaction, making the cat feel like a real companion on your browsing journey.
+  </p>
+
+  <h2>Testing Instructions</h2>
+
+  <p>
+    To fully test the extension, try moving your cursor to different areas of the page. Watch how the cat navigates around the text, creating holes as it moves. Try moving your cursor quickly from one side of the page to the other - the cat should switch to a running animation to catch up with you.
+  </p>
+
+  <p>
+    Test the hover behavior by placing your cursor over the cat and keeping it still. First, you'll see the idle animation. If you keep hovering for about 3 seconds, the cat should transition to either a sleeping animation or a paw-waving animation. This shows that the timing mechanics are working correctly.
+  </p>
+
+  <p>
+    The collision detection for bowls should be accurate. As the cat approaches a bowl, it should collect it when they overlap. The score counter in the top-left corner should increment, and you should hear a collection sound effect. After a few seconds, the bowl should respawn in a different location on the page.
+  </p>
+
+  <p>
+    Pay attention to the directional animations. The cat should face the direction it's moving - down, up, left, right, and the diagonal directions in between. The sprite sheet contains animations for all eight directions, and the code should select the appropriate animation based on the movement vector.
+  </p>
+
+  <p>
+    Finally, test the extension across different types of webpages - news sites, Wikipedia articles, blogs, and documentation pages. The paragraph detection should work on most standard web layouts, identifying suitable text blocks for the cat to interact with and for bowl placement.
+  </p>
+</body>
+</html>

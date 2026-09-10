@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pixel Walker</title>
+<style>
+  :root {
+    --bg: #0f0f11;
+    --surface: #1a1a1f;
+    --border: #2a2a32;
+    --accent: #7c6af7;
+    --green: #3ecf8e;
+    --gold: #FFD700;
+    --text: #e8e8ed;
+    --muted: #777780;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 260px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    font-size: 13px;
+  }
+
+  /* Header */
+  .header {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title-wrap { display: flex; align-items: center; gap: 10px; }
+  .sprite-preview {
+    width: 48px; height: 48px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+  .subtitle { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+  /* Toggle */
+  .toggle { position: relative; width: 44px; height: 24px; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; inset: 0;
+    background: var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid #333;
+  }
+  .slider::before {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    left: 2px; top: 2px;
+    background: var(--muted);
+    border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  input:checked + .slider { background: var(--accent); border-color: var(--accent); }
+  input:checked + .slider::before { transform: translateX(20px); background: #fff; }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat { flex: 1; padding: 10px 0; text-align: center; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-val { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .stat-val.gold { color: var(--gold); }
+  .stat-val.green { color: var(--green); }
+  .stat-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+
+  /* Preview canvas */
+  .preview-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  #previewCanvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border-radius: 6px;
+    background: #1a2a1a;
+    width: 228px;
+    height: 64px;
+  }
+  .preview-label { font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+  /* Settings */
+  .settings { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .setting-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+  }
+  .setting-label { font-size: 12px; color: var(--text); }
+  .val { font-size: 11px; color: var(--accent); min-width: 28px; text-align: right; }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 90px; height: 3px;
+    background: var(--border); border-radius: 2px; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%; background: var(--accent); cursor: pointer;
+  }
+
+  /* Sound toggle row */
+  .row-small {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 5px 0;
+    font-size: 12px; color: var(--text);
+  }
+  .mini-toggle { position: relative; width: 32px; height: 18px; }
+  .mini-toggle input { opacity: 0; width: 0; height: 0; }
+  .mini-slider {
+    position: absolute; inset: 0;
+    background: var(--border); border-radius: 9px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .mini-slider::before {
+    content: ''; position: absolute;
+    width: 12px; height: 12px; left: 3px; top: 3px;
+    background: var(--muted); border-radius: 50%;
+    transition: transform 0.2s, background 0.2s;
+  }
+  input:checked + .mini-slider { background: var(--accent); }
+  input:checked + .mini-slider::before { transform: translateX(14px); background: #fff; }
+
+  /* Footer */
+  .footer {
+    padding: 8px 16px 10px;
+    display: flex; gap: 8px;
+  }
+  .btn {
+    flex: 1; padding: 7px 0; border-radius: 7px;
+    border: 1px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 11px; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn:hover { color: var(--text); border-color: #444; }
+  .btn-primary {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: #6a59e0; }
+
+  .tag {
+    display: inline-block; padding: 1px 6px;
+    background: rgba(124,106,247,0.15); color: var(--accent);
+    border-radius: 4px; font-size: 9px; margin-left: 6px;
+    vertical-align: middle; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-wrap">
+    <canvas id="spritePreview" class="sprite-preview" width="16" height="16"></canvas>
+    <div>
+      <div class="title">Pixel Walker <span class="tag">β</span></div>
+      <div class="subtitle">powered by Pretext</div>
+    </div>
+  </div>
+  <label class="toggle">
+    <input type="checkbox" id="mainToggle">
+    <span class="slider"></span>
+  </label>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-val gold" id="statScore">0</div>
+    <div class="stat-label">★ Coins</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val green" id="statParas">—</div>
+    <div class="stat-label">Paragraphs</div>
+  </div>
+</div>
+
+<div class="preview-wrap">
+  <canvas id="previewCanvas" width="456" height="128"></canvas>
+  <div class="preview-label">your character on this page</div>
+</div>
+
+<div class="settings">
+  <div class="setting-row">
+    <span class="setting-label">Speed</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input type="range" id="speedSlider" min="1" max="5" step="0.5" value="1.4">
+      <span class="val" id="speedVal">1.4×</span>
+    </div>
+  </div>
+  <div class="setting-row">
+    <span class="setting-label">Size</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <input type="range" id="sizeSlider" min="2" max="5" step="1" value="3">
+      <span class="val" id="sizeVal">3×</span>
+    </div>
+  </div>
+  <div class="row-small">
+    <span>🔊 Sound effects</span>
+    <label class="mini-toggle">
+      <input type="checkbox" id="soundToggle" checked>
+      <span class="mini-slider"></span>
+    </label>
+  </div>
+</div>
+
+<div class="footer">
+  <button class="btn" id="respawnBtn">↺ Respawn</button>
+  <button class="btn btn-primary" id="mainBtn">Enable</button>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
